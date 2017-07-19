@@ -14,7 +14,53 @@
 }(this, function () {
     'use strict';
 
-    // TODO: var functions
+    var registerIsVisibleByClass = function (elementClass, options) {
+        var elementsAsomados = document.querySelectorAll('.' + elementClass);
+        for (var i = 0; i < elementsAsomados.length; ++i) {
+            Asomado.registerIsVisible(elementsAsomados[i], options)
+        }
+    };
+    var registerIsVisible = function (element, options) {
+        if (Asomado.isVisible(element)) {
+            Asomado.whenAsomado(element, options)
+        } else {
+            var prepareWhenVisible = Asomado.prepareWhenVisible(element, options);
+
+            if (window.addEventListener) {
+                window.addEventListener('scroll', prepareWhenVisible, false)
+            } else {
+                window.attachEvent('onscroll', prepareWhenVisible)
+            }
+        }
+    };
+    var addClass = function (element, classname) {
+        var currentClassList = (element.className || '').split(/\s+/);
+        currentClassList.push(currentClassList.indexOf(classname) > -1 ? '' : classname);
+        element.className = currentClassList.join(' ').trim()
+    };
+    var whenAsomado = function (element, options) {
+        Asomado.addClass(element, options.classWhenVisible)
+    };
+    var isVisible = function (element) {
+        var windowInnerHeight = window.innerHeight || document.documentElement.clientHeight;
+
+        return element.getBoundingClientRect().top - windowInnerHeight <= 0
+    };
+    var prepareWhenVisible = function (element, options) {
+        var scrollEventCallback = function (e) {
+            if (Asomado.isVisible(element)) {
+                Asomado.whenAsomado(element, options);
+
+                if (window.removeEventListener) {
+                    window.removeEventListener(e.type, scrollEventCallback, false);
+                } else {
+                    window.detachEvent('on' + e.type, scrollEventCallback);
+                }
+            }
+        };
+
+        return scrollEventCallback
+    };
 
     return {
         whenAsomado: whenAsomado,
