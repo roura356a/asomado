@@ -1,5 +1,5 @@
 /**
- * asomado 1.0.2
+ * asomado 1.0.3
  * Repo: https://github.com/roura356a/asomado
  */
 
@@ -17,34 +17,34 @@
     var registerIsVisibleByClass = function (elementClass, options) {
         var elementsAsomados = document.querySelectorAll('.' + elementClass);
         for (var i = 0; i < elementsAsomados.length; ++i) {
-            registerIsVisible(elementsAsomados[i], options)
+            registerIsVisible(elementsAsomados[i], options);
         }
     };
     var registerIsVisible = function (element, options) {
         if (_isVisible(element)) {
-            whenAsomado(element, options)
+            whenAsomado(element, options);
         } else {
             var prepareWhenVisible = _prepareWhenVisible(element, options);
 
             if (window.addEventListener) {
-                window.addEventListener('scroll', _prepareWhenVisible, false)
+                window.addEventListener('scroll', prepareWhenVisible, false);
             } else {
-                window.attachEvent('onscroll', _prepareWhenVisible)
+                window.attachEvent('onscroll', prepareWhenVisible);
             }
         }
     };
     var _addClass = function (element, classname) {
         var currentClassList = (element.className || '').split(/\s+/);
         currentClassList.push(currentClassList.indexOf(classname) > -1 ? '' : classname);
-        element.className = currentClassList.join(' ').trim()
+        element.className = currentClassList.join(' ').trim();
     };
     var whenAsomado = function (element, options) {
-        _addClass(element, options.classWhenVisible)
+        _addClass(element, options.classWhenVisible);
     };
     var _isVisible = function (element) {
         var windowInnerHeight = window.innerHeight || document.documentElement.clientHeight;
 
-        return element.getBoundingClientRect().top - windowInnerHeight <= 0
+        return element.getBoundingClientRect().top - windowInnerHeight <= 0;
     };
     var _prepareWhenVisible = function (element, options) {
         var scrollEventCallback = function (e) {
@@ -59,7 +59,7 @@
             }
         };
 
-        return scrollEventCallback
+        return scrollEventCallback;
     };
 
     return {

@@ -3,7 +3,7 @@
   "main": "src/asomado.js",
   "author": "Alberto Roura",
   "description": "Asomado is a tiny js plugin to add a class to an element when is in the viewport.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "homepage": "https://github.com/roura356a/asomado",
   "repository": {
     "type": "git",
