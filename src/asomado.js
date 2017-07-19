@@ -1,5 +1,5 @@
 /**
- * asomado 1.0.1
+ * asomado 1.0.2
  * Repo: https://github.com/roura356a/asomado
  */
 
@@ -17,39 +17,39 @@
     var registerIsVisibleByClass = function (elementClass, options) {
         var elementsAsomados = document.querySelectorAll('.' + elementClass);
         for (var i = 0; i < elementsAsomados.length; ++i) {
-            Asomado.registerIsVisible(elementsAsomados[i], options)
+            registerIsVisible(elementsAsomados[i], options)
         }
     };
     var registerIsVisible = function (element, options) {
-        if (Asomado.isVisible(element)) {
-            Asomado.whenAsomado(element, options)
+        if (_isVisible(element)) {
+            whenAsomado(element, options)
         } else {
-            var prepareWhenVisible = Asomado.prepareWhenVisible(element, options);
+            var prepareWhenVisible = _prepareWhenVisible(element, options);
 
             if (window.addEventListener) {
-                window.addEventListener('scroll', prepareWhenVisible, false)
+                window.addEventListener('scroll', _prepareWhenVisible, false)
             } else {
-                window.attachEvent('onscroll', prepareWhenVisible)
+                window.attachEvent('onscroll', _prepareWhenVisible)
             }
         }
     };
-    var addClass = function (element, classname) {
+    var _addClass = function (element, classname) {
         var currentClassList = (element.className || '').split(/\s+/);
         currentClassList.push(currentClassList.indexOf(classname) > -1 ? '' : classname);
         element.className = currentClassList.join(' ').trim()
     };
     var whenAsomado = function (element, options) {
-        Asomado.addClass(element, options.classWhenVisible)
+        _addClass(element, options.classWhenVisible)
     };
-    var isVisible = function (element) {
+    var _isVisible = function (element) {
         var windowInnerHeight = window.innerHeight || document.documentElement.clientHeight;
 
         return element.getBoundingClientRect().top - windowInnerHeight <= 0
     };
-    var prepareWhenVisible = function (element, options) {
+    var _prepareWhenVisible = function (element, options) {
         var scrollEventCallback = function (e) {
-            if (Asomado.isVisible(element)) {
-                Asomado.whenAsomado(element, options);
+            if (_isVisible(element)) {
+                whenAsomado(element, options);
 
                 if (window.removeEventListener) {
                     window.removeEventListener(e.type, scrollEventCallback, false);
