@@ -1,5 +1,5 @@
 /**
- * asomado 1.0.3
+ * asomado 1.0.4
  * Repo: https://github.com/roura356a/asomado
  */
 

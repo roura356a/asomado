@@ -1,6 +1,6 @@
-# asomado.js (v1.0.3)
+# asomado.js (v1.0.4)
 
-Asomado is a tiny javascript plugin to lazy add classes into elements when they appear in the viewport.
+Asomado is a tiny javascript plugin to lazy-add a class into elements when they appear in the viewport.
 
 Since `CSS` is mature enough to manage all animations, this plugin is in charge of only adding a css class in order to delegate the rest to the project css or javascript.
 
